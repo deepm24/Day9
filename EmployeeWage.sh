@@ -9,23 +9,19 @@ ran=$((RANDOM%2))
 a=1
 b=2
 
-
-if(($ran==$a))
-then
-      echo "prasent for full day"
+case "$ran"
+in
+1)    echo "prasent for full day"
       dayWage=$((fullday * phwages))
-  echo "full day wage $dayWage"
-      
-      
-if(($ran==$b))
-then
+       echo  "full day wage $dayWage"
+      ;;
+2)
       echo "prasent for  half day"
       dayWage=$((halfday * phwages))
-echo  "half day wage $dayWage"
+       echo  "half  day wage $dayWage"
 
 
 
-else
+*)
       echo "absent"
-fi
-
+esac
