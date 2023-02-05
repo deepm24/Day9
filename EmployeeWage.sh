@@ -1,27 +1,43 @@
 echo "welcome $name in wage Computation program on day_9_1 branch"
-phwages=20
+halfDay=1
+fullDay=2
+perHourSal=100
+monthDay=31
+maxDay=20
+totalHour=0
+preDay=0
+absDay=0
+day=1
 
-fullday=8
-halfday=4
+function calcPerDayHour(){
+	case $1 in
+                $halfDay)
+                        empHour=4
+                        ;;
+                $fullDay)
+                        empHour=8
+                        ;;
+                *)
+                        empHour=0
+                        ;;
+        esac
+	echo $empHour
+}
 
-ran=$((RANDOM%2))
-
-a=1
-b=2
-
-case "$ran"
-in
-1)    echo "prasent for full day"
-      dayWage=$((fullday * phwages))
-       echo  "full day wage $dayWage"
-      ;;
-2)
-      echo "prasent for  half day"
-      dayWage=$((halfday * phwages))
-       echo  "half  day wage $dayWage"
-
-
-
-*)
-      echo "absent"
-esac
+while [[ $day -le $monthDay && $preDay -lt $maxDay && $totalHour -lt 120 ]]
+do
+	perDayHour=$( calcPerDayHour $((RANDOM%3)))
+	totalHour=$(($totalHour+$perDayHour))
+	if [ $perDayHour -eq 0 ]
+	then
+		((absDay++))
+	else
+		((preDay++))
+	fi
+	((day++))
+done
+monthlySal=$(($totalHour*$perHourSal))
+echo "total monthly salary is $monthlySal"
+echo "Total day present is $preDay"
+echo "TOtal Hour Worked is $totalHour"
+echo "Absent days are $absDay"
